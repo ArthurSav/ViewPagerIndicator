@@ -130,7 +130,10 @@ public class ViewPagerIndicator
 				(int) (mItemSize * mItemScale),
 				(int) (mItemSize * mItemScale)
 		);
-		if (position > 0) {
+
+		boxParams.weight = 1;
+
+		if (position >= 0) {
 			boxParams.setMargins(mDelimiterSize, 0, 0, 0);
 		}
 		box.setLayoutParams(boxParams);
@@ -141,7 +144,7 @@ public class ViewPagerIndicator
 	private ImageView createItem() {
 		final ImageView index = new ImageView(getContext());
 		final FrameLayout.LayoutParams indexParams = new FrameLayout.LayoutParams(
-				mItemSize,
+				ViewGroup.LayoutParams.MATCH_PARENT,
 				mItemSize
 		);
 		indexParams.gravity = Gravity.CENTER;
