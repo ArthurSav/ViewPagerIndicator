@@ -83,14 +83,13 @@ public class ViewPagerIndicator
 
 	public void setupWithViewPager(@NonNull final ViewPager viewPager) {
 		setPageCount(viewPager.getAdapter().getCount());
-		viewPager.addOnPageChangeListener(new OnPageChangeListener());
 	}
 
 	public void addOnPageChangeListener(final ViewPager.OnPageChangeListener listener) {
 		mListener = listener;
 	}
 
-	private void setSelectedIndex(final int selectedIndex) {
+	public void setSelectedIndex(final int selectedIndex) {
 		if (selectedIndex < 0 || selectedIndex > mPageCount - 1) {
 			return;
 		}
