@@ -33,7 +33,7 @@ class MainActivity
 
 		mViewPager.setAdapter(new MyPagerAdapter());
 		mViewPagerIndicator.setupWithViewPager(mViewPager);
-		mViewPagerIndicator.addOnPageChangeListener(mOnPageChangeListener);
+		mViewPager.addOnPageChangeListener(mOnPageChangeListener);
 	}
 
 	private
@@ -87,6 +87,7 @@ class MainActivity
 		@Override
 		public
 		void onPageSelected(final int position) {
+			mViewPagerIndicator.setSelectedIndex(position);
 			Toast.makeText(MainActivity.this, "Page selected " + position, Toast.LENGTH_SHORT).show();
 		}
 

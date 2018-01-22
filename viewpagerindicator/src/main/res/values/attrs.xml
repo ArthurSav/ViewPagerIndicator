@@ -7,5 +7,6 @@
 		<attr name = "itemTint" format = "color" />
 		<attr name = "delimiterSize" format = "dimension" />
 		<attr name = "itemIcon" format = "reference" />
+		<attr name="showProgress" format="boolean" />
 	</declare-styleable>
 </resources>

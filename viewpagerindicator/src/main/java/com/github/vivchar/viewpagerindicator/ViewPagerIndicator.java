@@ -3,6 +3,7 @@ package com.github.vivchar.viewpagerindicator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,8 @@ public class ViewPagerIndicator
 	private static final float NO_SCALE = 1f;
 	private static final int DEF_VALUE = 10;
 	private static final int DEF_ICON = R.drawable.white_circle;
+
+	private boolean showProgress;
 
 	private int mItemColor = Color.WHITE;
 	private int mItemSelectedColor = Color.WHITE;
@@ -59,6 +62,7 @@ public class ViewPagerIndicator
 			mItemColor = attributes.getColor(R.styleable.ViewPagerIndicator_itemTint, Color.WHITE);
 			mDelimiterSize = attributes.getDimensionPixelSize(R.styleable.ViewPagerIndicator_delimiterSize, DEF_VALUE);
 			mItemIcon = attributes.getResourceId(R.styleable.ViewPagerIndicator_itemIcon, DEF_ICON);
+			showProgress = attributes.getBoolean(R.styleable.ViewPagerIndicator_showProgress, false);
 		} finally {
 			attributes.recycle();
 		}
@@ -98,9 +102,19 @@ public class ViewPagerIndicator
 		unselectedView.animate().scaleX(NO_SCALE).scaleY(NO_SCALE).setDuration(300).start();
 		unselectedView.setColorFilter(mItemColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
-		final ImageView selectedView = mIndexImages.get(selectedIndex);
-		selectedView.animate().scaleX(mItemScale).scaleY(mItemScale).setDuration(300).start();
-		selectedView.setColorFilter(mItemSelectedColor, android.graphics.PorterDuff.Mode.SRC_IN);
+		if (showProgress) {
+			for (int i = 0; i <= selectedIndex; i++) {
+				final ImageView selectedView = mIndexImages.get(i);
+				selectedView.animate().scaleX(mItemScale).scaleY(mItemScale).setDuration(300).start();
+				selectedView.setColorFilter(mItemSelectedColor, android.graphics.PorterDuff.Mode.SRC_IN);
+			}
+		}
+
+		else {
+			final ImageView selectedView = mIndexImages.get(mSelectedIndex);
+			selectedView.animate().scaleX(mItemScale).scaleY(mItemScale).setDuration(300).start();
+			selectedView.setColorFilter(mItemSelectedColor, android.graphics.PorterDuff.Mode.SRC_IN);
+		}
 
 		mSelectedIndex = selectedIndex;
 	}
